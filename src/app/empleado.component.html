@@ -1,0 +1,106 @@
+
+<h3 style="color:blue;">
+    {{titulo}}
+</h3>
+
+<hr/>
+
+<h3>Selector de colores:</h3>
+<button (click)="logColorSeleccionado()">Mostrar Log</button>
+<input type="text" [(ngModel)]="color_seleccionado"/>
+
+<hr/>
+
+<!-- Ejercicio con directiva ngClass-->
+<pre [style.border]="color_seleccionado == 'red' ? '5px solid black' : '1px solid white'"
+     [class.bordeAzul]="color_seleccionado == 'blue'"
+
+>
+    <strong>Color elegido:</strong>
+    {{color_seleccionado}}
+</pre>
+<hr/>
+
+<!-- Ejercicio con atributo style y ngClass como atributo-->
+<!-- Si color_seleccionado es rojo le pone un borde solido en negro, sino un borde fijo en blanco-->
+<pre [style.border]="color_seleccionado == 'red' ? '5px solid black' : '1px solid white'"
+     [class.bordeAzul]="color_seleccionado == 'blue'"
+
+>
+    <strong>Color elegido:</strong>
+    {{color_seleccionado}}
+</pre>
+
+<div [ngStyle]="{
+    'background':color_seleccionado,
+    'width': '200px',
+    'height':'200px',
+    'float': 'right',
+    'margin-right': '70%'
+    }"></div>
+<div style="clear:both"></div>
+
+<hr/>
+
+<h3>Colores switch</h3>
+<button (click)="cambiarColor()">Cambiar color</button>
+<ul [ngSwitch]="color">
+    <li *ngSwitchCase="'#fc020f'"[ngStyle]="{
+        'background':color,
+        'color':'white',
+        'padding': '20px'
+    }">Es de color rojo</li>
+    <li *ngSwitchCase="'#5dd206'"[ngStyle]="{
+        'background':color,
+        'color':'white',
+        'padding': '20px'
+    }">Es de color verde</li>
+    <li *ngSwitchCase="'#3849fd'"[ngStyle]="{
+        'background':color,
+        'color':'white',
+        'padding': '20px'
+    }">Es de color azul</li>
+    <li *ngSwitchDefault [ngStyle]="{
+        'background':color,
+        'color':'white',
+        'padding': '20px'
+    }">Es de color {{color}} </li>
+</ul>
+
+<hr/>
+
+<strong>Team Leader:</strong> 
+
+<br/>
+
+<ul>
+        <li>{{empleado.nombre}}</li>
+        <li>{{empleado.edad}}</li>
+        <li>{{empleado.cargo}}</li>
+        <li *ngIf="empleado.contratado == true">Está contratado</li>
+        <li *ngIf="empleado.contratado == false">No está contratado</li>
+</ul>
+
+<div *ngIf="trabajadorext == true">
+    <button (click)="cambiarExterno(false)">Mostrar empleados</button>
+</div>
+
+<div *ngIf="trabajadorext == false">
+    <button (click)="cambiarExterno(true)">Ocultar empleados</button>
+    <h3>Listado de empleados</h3>
+    <ul>
+        <li *ngFor="let empleado of trabajadores; let i =index">
+            <strong>Empleado {{i+1}}:</strong>
+            <ul>
+                    <li>{{empleado.nombre}}</li>
+                    <li>{{empleado.edad}}</li>
+                    <li>{{empleado.cargo}}</li>
+                    <li *ngIf="empleado.contratado == true">Está contratado</li>
+                    <li *ngIf="empleado.contratado == false">No está contratado</li>
+            </ul>
+        </li>
+    </ul>
+</div>
+
+
+
